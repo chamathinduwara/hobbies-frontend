@@ -14,7 +14,7 @@ import { useEffect, useState } from "react";
 import api from "../api";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../config/routes.js";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { isAuth } from "../store/atoms.js";
 
 const Loading = () => {

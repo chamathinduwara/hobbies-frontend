@@ -15,7 +15,6 @@ import { ROUTES } from "../config/routes.js";
 import HobbiesComponent from "../components/HobbiesComponent.jsx";
 import register from "../api/register";
 
-
 const SignUp = () => {
   const formik = useFormik({
     initialValues: {
@@ -108,16 +107,23 @@ const SignUp = () => {
           </Grid>
           <HobbiesComponent formik={formik} />
           {/* <PhoneNumbersComponent formik={formik} /> */}
-
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2, width: "50%" }}
-            onClick={formik.handleSubmit}
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
           >
-            Sign Up
-          </Button>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2, width: "30%" }}
+              onClick={formik.handleSubmit}
+            >
+              Sign Up
+            </Button>
+          </Box>
 
           <Grid container justifyContent="flex-end">
             <Grid item>

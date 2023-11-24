@@ -3,8 +3,6 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Checkbox from "@mui/material/Checkbox";
 import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
@@ -14,11 +12,15 @@ import Container from "@mui/material/Container";
 import { useFormik } from "formik";
 import register from "../api/register";
 import { useNavigate } from "react-router-dom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { isAuth } from "../store/atoms.js";
 
 import { ROUTES } from "../config/routes.js";
 
 const SignIn = () => {
   const navigate = useNavigate();
+  const setIsAuth = useSetRecoilState(isAuth);
+  const isAuthenticated = useRecoilValue(isAuth);
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -30,11 +32,12 @@ const SignIn = () => {
         const response = await register.login(values);
         const { accessToken } = response;
         setResponseInCookie("accessToken", accessToken);
-        console.log(response);
-        navigate(ROUTES.HOME);
       } catch (error) {
         console.error("Login Error", error);
       }
+      setIsAuth(true);
+      console.log(isAuthenticated);
+      navigate(ROUTES.HOME);
     },
   });
 
@@ -104,6 +107,9 @@ const SignIn = () => {
                   Don,t have an account? Sign Up
                 </Typography>
               </Link>
+              <Typography variant="body2">
+                sample username:- Chamath, email:-chamath@gmail.com
+              </Typography>
             </Grid>
           </Grid>
         </Box>

@@ -15,7 +15,7 @@ import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import api from "../api";
 import { ROUTES } from "../config/routes.js";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { isAuth } from "../store/atoms.js";
 
 
@@ -28,6 +28,7 @@ const EditUser = () => {
   const [userDetails, setUserDetails] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
+
 
   const isAuthenticated = useRecoilValue(isAuth);
 

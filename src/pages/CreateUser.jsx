@@ -16,11 +16,12 @@ import HobbiesComponent from "../components/HobbiesComponent.jsx";
 import register from "../api/register";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { isAuth } from "../store/atoms.js";
 
 const CreateUser = () => {
   const isAuthenticated = useRecoilValue(isAuth);
+
   const navigate = useNavigate();
   useEffect(() => {
     console.log(isAuthenticated);
@@ -120,16 +121,23 @@ const CreateUser = () => {
           </Grid>
           <HobbiesComponent formik={formik} />
           {/* <PhoneNumbersComponent formik={formik} /> */}
-
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2, width: "50%" }}
-            onClick={formik.handleSubmit}
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
           >
-            Create User
-          </Button>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2, width: "50%" }}
+              onClick={formik.handleSubmit}
+            >
+              Create User
+            </Button>
+          </Box>
         </Box>
       </Box>
     </Container>

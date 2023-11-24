@@ -65,6 +65,15 @@ const api = {
             return null;
         }
     },
+    logout: async () => {
+        const response = await client.get("/api/logout");
+        if (200 <= response.status <= 300) {
+            console.log(response.data);
+            return response.data;
+        } else {
+            return null;
+        }
+    },
 };
 
 export default api;

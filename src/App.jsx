@@ -20,7 +20,6 @@ function App() {
   const isAuthenticated = useRecoilValue(isAuth);
   const navigate = useNavigate();
   useEffect(() => {
-    console.log(isAuthenticated);
     if (!isAuthenticated) {
       navigate(ROUTES.SIGNIN);
     }

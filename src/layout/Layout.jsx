@@ -12,6 +12,11 @@ import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 import NavDrawer from "./NavDrawer.jsx";
 import { ROUTES } from "../config/routes.js";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { isAuth } from "../store/atoms.js";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import api from "../api/index.js";
 
 const drawerWidth = 240;
 const AppBar = styled(MuiAppBar, {
@@ -32,10 +37,26 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
+function deleteCookie(name) {
+  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;`;
+}
+
 export default function Layout({ children }) {
-  const [open, setOpen] = React.useState(true);
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(true);
+  const isAuthenticated = useRecoilValue(isAuth);
+  const setIsAuth = useSetRecoilState(isAuth);
+
   const toggleDrawer = () => {
     setOpen(!open);
+  };
+
+  const handleSignOut = () => {
+    console.log("sign out");
+    deleteCookie("accessToken");
+    setIsAuth(false);
+    api.logout();
+    navigate(ROUTES.SIGNIN);
   };
   return (
     <Box sx={{ display: "flex" }}>
@@ -73,42 +94,57 @@ export default function Layout({ children }) {
               HOBBY
             </Link>
           </Typography>
+          {!isAuthenticated && (
+            <Box>
+              <Link
+                to={ROUTES.SIGNIN}
+                style={{ textDecoration: "none", color: "white" }}
+              >
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  sx={{ color: "white", marginLeft: "20px" }}
+                >
+                  Sign IN
+                </Button>
+              </Link>
+              <Link to={ROUTES.CREATE}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  sx={{ margin: "2px" }}
+                >
+                  <Typography color={"white"} variant="body1">
+                    Create User
+                  </Typography>
+                </Button>
+              </Link>
+              <Link to={ROUTES.REGISTER}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  sx={{ margin: "2px" }}
+                >
+                  <Typography color={"white"} variant="body1">
+                    Register
+                  </Typography>
+                </Button>
+              </Link>
+            </Box>
+          )}
 
-          <Link
-            to={ROUTES.SIGNIN}
-            style={{ textDecoration: "none", color: "white" }}
-          >
-            <Button
-              variant="contained"
-              color="secondary"
-              sx={{ color: "white", marginLeft: "20px" }}
-            >
-              Sign IN
-            </Button>
-          </Link>
-
-          <Link to={ROUTES.CREATE}>
+          {isAuthenticated && (
             <Button
               variant="contained"
               color="secondary"
               sx={{ margin: "2px" }}
+              onClick={handleSignOut}
             >
               <Typography color={"white"} variant="body1">
-                Create User
+                Sign Out
               </Typography>
             </Button>
-          </Link>
-          <Link to={ROUTES.REGISTER}>
-            <Button
-              variant="contained"
-              color="secondary"
-              sx={{ margin: "2px" }}
-            >
-              <Typography color={"white"} variant="body1">
-                Register
-              </Typography>
-            </Button>
-          </Link>
+          )}
         </Toolbar>
       </AppBar>
       <NavDrawer toggle={toggleDrawer} isOpened={open} />
