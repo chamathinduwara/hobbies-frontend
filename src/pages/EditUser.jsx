@@ -18,7 +18,6 @@ import { ROUTES } from "../config/routes.js";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { isAuth } from "../store/atoms.js";
 
-
 const Loading = () => {
   return <div>Loading...</div>;
 };
@@ -28,7 +27,6 @@ const EditUser = () => {
   const [userDetails, setUserDetails] = useState([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-
 
   const isAuthenticated = useRecoilValue(isAuth);
 
@@ -183,7 +181,12 @@ const EditUser = () => {
         <Button onClick={handleAddHobby}>Add Hobby</Button>
       </List>
 
-      <Button variant="contained" color="primary" onClick={handleSubmit}>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleSubmit}
+        sx={{ marginRight: "5px" }}
+      >
         Edit
       </Button>
       <Button variant="contained" color="primary" onClick={handleDelete}>

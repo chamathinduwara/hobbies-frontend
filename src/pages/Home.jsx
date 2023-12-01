@@ -10,16 +10,16 @@ import api from "../api";
 import { ROUTES } from "../config/routes";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { isAuth } from "../store/atoms";
+import { isAuth, ATOM_ME } from "../store/atoms";
 import TextField from "@mui/material/TextField";
 
 const Home = () => {
+  const setMe = useSetRecoilState(ATOM_ME);
   const [users, setUsers] = useState([]);
   const [open, setOpen] = useState(false);
   const [selectedUser, setselectedUser] = useState(null);
   const navigate = useNavigate();
   const [filter, setFilter] = useState("");
-
 
   const isAuthenticated = useRecoilValue(isAuth);
 
@@ -28,16 +28,17 @@ const Home = () => {
     if (!isAuthenticated) {
       navigate(ROUTES.SIGNIN);
     }
+    else{
+      (async function () {
+        const users = await api.users();
+        const me = await api.currentUser();
+        setMe(me);
+        console.log(me);
+        setUsers(users);
+      })();
+    }
   }, []);
 
-  useEffect(() => {
-    (async function () {
-      const users = await api.users();
-      console.log(users);
-      setUsers(users);
-    })();
-  }, []);
-  // Sample data for 15 cards
 
   const handleOpen = (index) => {
     console.log(index);
@@ -74,7 +75,7 @@ const Home = () => {
       </Box>
       <Grid container spacing={2}>
         {filteredUsers.map((user, index) => (
-          <Grid key={index} item xs={4}>
+          <Grid key={index} item xs={4} minWidth="300px">
             <Card
               sx={{
                 minWidth: 275,
@@ -82,6 +83,7 @@ const Home = () => {
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
+                margin: "5px",
               }}
             >
               <CardContent>
@@ -184,7 +186,6 @@ const Home = () => {
                     <Typography variant="body2">No hobbies</Typography>
                   )}
                 </Box>
-                {/* You can add more details here */}
               </>
             )}
           </Box>

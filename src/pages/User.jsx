@@ -11,11 +11,10 @@ import ContactPhoneIcon from "@mui/icons-material/ContactPhone";
 import SportsHandballIcon from "@mui/icons-material/SportsHandball";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { useEffect, useState } from "react";
-import api from "../api";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "../config/routes.js";
 import { useRecoilValue, useSetRecoilState } from "recoil";
-import { isAuth } from "../store/atoms.js";
+import { isAuth,ATOM_ME  } from "../store/atoms.js";
 
 const Loading = () => {
   return <div>Loading...</div>;
@@ -26,21 +25,19 @@ const UserDetails = () => {
   const [loading, setLoading] = useState(true);
 
   const isAuthenticated = useRecoilValue(isAuth);
+  const me = useRecoilValue(ATOM_ME);
   const navigate = useNavigate();
   useEffect(() => {
     console.log(isAuthenticated);
     if (!isAuthenticated) {
       navigate(ROUTES.SIGNIN);
     }
-  }, []);
-  useEffect(() => {
-    (async function () {
-      const user = await api.currentUser();
-      console.log(user);
-      setCurrentUser(user);
-      setLoading(false);
-      //   setUserDetails(user);
-    })();
+    else{
+      (async function () {
+        setCurrentUser(me);
+        setLoading(false);
+      })();
+    }
   }, []);
 
   if (loading) {

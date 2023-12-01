@@ -10,12 +10,14 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
 
 import { ROUTES } from "../config/routes.js";
 import HobbiesComponent from "../components/HobbiesComponent.jsx";
 import register from "../api/register";
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -29,6 +31,7 @@ const SignUp = () => {
         console.log(values);
         const response = await register.register(values);
         console.log(response);
+        navigate(ROUTES.SIGNIN);
       } catch (error) {
         console.error("Login Error", error);
       }

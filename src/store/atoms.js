@@ -2,7 +2,12 @@ import { atom } from "recoil";
 
 export const ATOM_ME = atom({
     key: 'me',
-    default: ''
+    default: {
+        name: '',
+        email: '',
+        hobbies: [],
+        contacts: [],
+    }
 })
 
 export const isAuth = atom(
@@ -12,13 +17,3 @@ export const isAuth = atom(
     }
 )
 
-
-export const USER_STATE = atom({
-    key: 'userState',
-    default: {
-        name: '',
-        email: '',
-        hobbies: [],
-        contacts: [],
-    }
-})

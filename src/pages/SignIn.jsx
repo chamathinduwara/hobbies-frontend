@@ -14,13 +14,13 @@ import register from "../api/register";
 import { useNavigate } from "react-router-dom";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { isAuth } from "../store/atoms.js";
+import Cookies from "js-cookie";
 
 import { ROUTES } from "../config/routes.js";
 
 const SignIn = () => {
   const navigate = useNavigate();
   const setIsAuth = useSetRecoilState(isAuth);
-  const isAuthenticated = useRecoilValue(isAuth);
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -31,19 +31,18 @@ const SignIn = () => {
         console.log(values);
         const response = await register.login(values);
         const { accessToken } = response;
-        setResponseInCookie("accessToken", accessToken);
+        Cookies.remove("accessToken");
+        Cookies.set("accessToken", accessToken);
+        Cookies.get("accessToken") && setIsAuth(true);
+        navigate(ROUTES.ROOT);
       } catch (error) {
         console.error("Login Error", error);
+
       }
-      setIsAuth(true);
-      console.log(isAuthenticated);
-      navigate(ROUTES.HOME);
+
     },
   });
 
-  const setResponseInCookie = (cookieName, value) => {
-    document.cookie = `${cookieName}=${value}; expires=Thu, 01 Jan 2026 00:00:00 UTC; path=/`;
-  };
   return (
     <Container component={"main"} maxWidth={"xs"}>
       <CssBaseline />

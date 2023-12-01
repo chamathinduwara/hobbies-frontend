@@ -17,6 +17,7 @@ import { isAuth } from "../store/atoms.js";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api/index.js";
+import Cookies from "js-cookie";
 
 const drawerWidth = 240;
 const AppBar = styled(MuiAppBar, {
@@ -53,7 +54,7 @@ export default function Layout({ children }) {
 
   const handleSignOut = () => {
     console.log("sign out");
-    deleteCookie("accessToken");
+    Cookies.remove("accessToken");
     setIsAuth(false);
     api.logout();
     navigate(ROUTES.SIGNIN);
@@ -64,7 +65,7 @@ export default function Layout({ children }) {
       <AppBar position="absolute" open={open}>
         <Toolbar
           sx={{
-            pr: "24px", // keep right padding when drawer closed
+            pr: "24px",
           }}
         >
           <IconButton
@@ -106,17 +107,6 @@ export default function Layout({ children }) {
                   sx={{ color: "white", marginLeft: "20px" }}
                 >
                   Sign IN
-                </Button>
-              </Link>
-              <Link to={ROUTES.CREATE}>
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  sx={{ margin: "2px" }}
-                >
-                  <Typography color={"white"} variant="body1">
-                    Create User
-                  </Typography>
                 </Button>
               </Link>
               <Link to={ROUTES.REGISTER}>

@@ -5,7 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import { redirect } from "react-router-dom";
 import { ROUTES } from "./config/routes.js";
 import { useSetRecoilState, useRecoilValue } from "recoil";
-import { isAuth } from "./store/atoms.js";
+import { isAuth, ATOM_ME } from "./store/atoms.js";
 import * as React from "react";
 import Home from "./pages/Home.jsx";
 import SignUp from "./pages/SignUp.jsx";
@@ -15,13 +15,21 @@ import User from "./pages/User.jsx";
 import EditUser from "./pages/EditUser.jsx";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import api from "./api";
 
 function App() {
+  const setMe = useSetRecoilState(ATOM_ME);
   const isAuthenticated = useRecoilValue(isAuth);
   const navigate = useNavigate();
   useEffect(() => {
     if (!isAuthenticated) {
       navigate(ROUTES.SIGNIN);
+    } else {
+      (async function () {
+        const user = await api.currentUser();
+        setMe(user);
+        console.log(user);
+      })();
     }
   }, []);
   return (
