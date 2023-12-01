@@ -1,17 +1,29 @@
-import React, { useState } from "react";
-import { Box, Grid, Modal, Backdrop, Fade } from "@mui/material";
+import React from "react";
+
+// MUI Imports
+import { Box, Grid, Modal, Fade } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import { useEffect } from "react";
-import api from "../api";
-import { ROUTES } from "../config/routes";
+import TextField from "@mui/material/TextField";
+
+// React Imports
+import { useEffect, useState } from "react";
+
+// Package Imports
 import { useNavigate } from "react-router-dom";
+
+// Local Imports
+import { ROUTES } from "../config/routes";
+
+// Recoil Imports
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { isAuth, ATOM_ME } from "../store/atoms";
-import TextField from "@mui/material/TextField";
+
+// API Imports
+import api from "../api";
 
 const Home = () => {
   const setMe = useSetRecoilState(ATOM_ME);

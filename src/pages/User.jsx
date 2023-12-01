@@ -1,4 +1,6 @@
 import React from "react";
+
+// MUI Imports
 import {
   Typography,
   List,
@@ -10,9 +12,15 @@ import EmailIcon from "@mui/icons-material/Email";
 import ContactPhoneIcon from "@mui/icons-material/ContactPhone";
 import SportsHandballIcon from "@mui/icons-material/SportsHandball";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
+
+// Reaxt Imports
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+// Local Imports
 import { ROUTES } from "../config/routes.js";
+
+// Recoil Imports
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { isAuth,ATOM_ME  } from "../store/atoms.js";
 

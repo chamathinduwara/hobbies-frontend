@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+
+// MUI Imports
 import {
   Typography,
   TextField,
@@ -11,12 +13,20 @@ import EmailIcon from "@mui/icons-material/Email";
 import ContactPhoneIcon from "@mui/icons-material/ContactPhone";
 import SportsHandballIcon from "@mui/icons-material/SportsHandball";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
+
+// Package Imports
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import api from "../api";
+
+// Local Imports
 import { ROUTES } from "../config/routes.js";
+
+// Recoil Imports
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { isAuth } from "../store/atoms.js";
+
+// API Imports
+import api from "../api";
 
 const Loading = () => {
   return <div>Loading...</div>;

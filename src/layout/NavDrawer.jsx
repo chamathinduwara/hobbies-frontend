@@ -1,20 +1,24 @@
+import * as React from "react";
+
+// MUI Imports
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft.js";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
-import { Link } from "react-router-dom";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MuiDrawer from "@mui/material/Drawer";
 import { styled } from "@mui/material/styles";
-import * as React from "react";
-import { ROUTES } from "../config/routes.js";
-
-import GroupIcon from "@mui/icons-material/Group";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import ImportContactsIcon from "@mui/icons-material/ImportContacts";
+
+// Local Imports
+import { ROUTES } from "../config/routes.js";
+
+// Package Imports
+import { Link } from "react-router-dom";
 
 const drawerWidth = 240;
 

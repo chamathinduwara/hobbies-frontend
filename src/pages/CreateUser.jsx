@@ -1,23 +1,33 @@
 import React from "react";
+import { useEffect } from "react";
+
+// MUI Imports
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
-import { useFormik } from "formik";
 
-import { ROUTES } from "../config/routes.js";
-import HobbiesComponent from "../components/HobbiesComponent.jsx";
-import register from "../api/register";
+// Package Imports
+import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+
+// Local Imports
+import { ROUTES } from "../config/routes.js";
+
+// Component Imports
+import HobbiesComponent from "../components/HobbiesComponent.jsx";
+
+// Recoil Imports
+import { useRecoilValue } from "recoil";
 import { isAuth } from "../store/atoms.js";
+
+// API Imports
+import register from "../api/register";
 
 const CreateUser = () => {
   const isAuthenticated = useRecoilValue(isAuth);

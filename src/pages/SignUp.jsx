@@ -1,19 +1,28 @@
 import React from "react";
+
+// MUI Imports
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+
+// Package Imports
+import { Link } from "react-router-dom";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 
+// Local Imports
 import { ROUTES } from "../config/routes.js";
+
+// Component Imports
 import HobbiesComponent from "../components/HobbiesComponent.jsx";
+
+// API Imports
 import register from "../api/register";
 
 const SignUp = () => {

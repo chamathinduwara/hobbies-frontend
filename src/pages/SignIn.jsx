@@ -1,22 +1,33 @@
 import React from "react";
+
+// MUI Imports
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import { Link } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
+
+// Package Imports
 import { useFormik } from "formik";
-import register from "../api/register";
 import { useNavigate } from "react-router-dom";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { isAuth } from "../store/atoms.js";
+
+// Local Imports
+import { Link } from "react-router-dom";
 import Cookies from "js-cookie";
 
+// Recoil Imports
+import { useSetRecoilState } from "recoil";
+import { isAuth } from "../store/atoms.js";
+
+// API Imports
 import { ROUTES } from "../config/routes.js";
+
+// Component Imports
+import register from "../api/register";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -37,9 +48,7 @@ const SignIn = () => {
         navigate(ROUTES.ROOT);
       } catch (error) {
         console.error("Login Error", error);
-
       }
-
     },
   });
 

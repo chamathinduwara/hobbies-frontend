@@ -1,4 +1,6 @@
 import * as React from "react";
+
+// MUI Imports
 import { styled } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
@@ -9,7 +11,11 @@ import IconButton from "@mui/material/IconButton";
 import Container from "@mui/material/Container";
 import MenuIcon from "@mui/icons-material/Menu";
 import Button from "@mui/material/Button";
+
+// Package Imports
 import { Link } from "react-router-dom";
+
+// Component Imports
 import NavDrawer from "./NavDrawer.jsx";
 import { ROUTES } from "../config/routes.js";
 import { useRecoilValue, useSetRecoilState } from "recoil";
@@ -38,9 +44,6 @@ const AppBar = styled(MuiAppBar, {
   }),
 }));
 
-function deleteCookie(name) {
-  document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;`;
-}
 
 export default function Layout({ children }) {
   const navigate = useNavigate();
@@ -53,10 +56,9 @@ export default function Layout({ children }) {
   };
 
   const handleSignOut = () => {
-    console.log("sign out");
-    Cookies.remove("accessToken");
     setIsAuth(false);
     api.logout();
+    Cookies.remove("accessToken");
     navigate(ROUTES.SIGNIN);
   };
   return (
